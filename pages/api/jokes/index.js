@@ -10,5 +10,12 @@ export default async function handler(request, response) {
     return;
   }
 
+  if (request.method === "POST") {
+    const jokeDataBackend = request.body;
+    await Joke.create(jokeDataBackend);
+    response.status(201).json({ status: "Joke created" });
+    return;
+  }
+
   response.status(405).json({ status: "Method not allowed." });
 }

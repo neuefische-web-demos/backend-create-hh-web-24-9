@@ -1,5 +1,6 @@
 import useSWR from "swr";
 import Link from "next/link";
+import JokeForm from "@/components/JokeForm";
 
 export default function HomePage() {
   const { data, isLoading } = useSWR("/api/jokes");
@@ -13,12 +14,15 @@ export default function HomePage() {
   }
 
   return (
-    <ul>
-      {data.map((joke) => (
-        <li key={joke._id}>
-          <Link href={`/${joke._id}`}>{joke.joke}</Link>
-        </li>
-      ))}
-    </ul>
+    <>
+      <JokeForm />
+      <ul>
+        {data.map((joke) => (
+          <li key={joke._id}>
+            <Link href={`/${joke._id}`}>{joke.joke}</Link>
+          </li>
+        ))}
+      </ul>
+    </>
   );
 }
